@@ -27,6 +27,7 @@ class PostFactory extends Factory
             'comment_able' => rand(0, 1),
             'user_id' => User::inRandomOrder()->first()->id,
             'category_id' => Category::inRandomOrder()->first()->id,
+            'num_of_views' => rand(0, 100),
             'created_at' => fake()->date('y-M-d H:m:s'),
             'updated_at' => fake()->date('y-M-d H:m:s'),
         ];

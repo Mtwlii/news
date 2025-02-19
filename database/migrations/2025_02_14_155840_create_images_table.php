@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('images', function (Blueprint $table) {
             $table->id();
-            $table->string('path')->default('https://www.pngarts.com/files/10/Default-Profile-Picture-PNG-Image.png');
+            $table->string('path')->default('https://picsum.photos/100/100')->nullable();
             $table->foreignId('post_id')->references('id')->on('posts')->onDelete('cascade');
             $table->timestamps();
         });
