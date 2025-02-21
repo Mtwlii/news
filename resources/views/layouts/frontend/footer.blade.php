@@ -6,15 +6,20 @@
                     <div class="footer-widget">
                         <h3 class="title">Get in Touch</h3>
                         <div class="contact-info">
-                            <p><i class="fa fa-map-marker"></i>123 News Street, NY, USA</p>
-                            <p><i class="fa fa-envelope"></i>info@example.com</p>
-                            <p><i class="fa fa-phone"></i>+123-456-7890</p>
+                            <p><i class="fa fa-map-marker"></i>{{ $getSetting->street }},
+                                {{ $getSetting->city }}, {{ $getSetting->country }}
+                            </p>
+                            <p><i class="fa fa-envelope"></i>{{ $getSetting->email }}</p>
+                            <p><i class="fa fa-phone"></i>{{ $getSetting->phone }}</p>
                             <div class="social">
-                                <a href=""><i class="fab fa-twitter"></i></a>
-                                <a href=""><i class="fab fa-facebook-f"></i></a>
-                                <a href=""><i class="fab fa-linkedin-in"></i></a>
-                                <a href=""><i class="fab fa-instagram"></i></a>
-                                <a href=""><i class="fab fa-youtube"></i></a>
+                                <a href="{{ $getSetting->twitter }}" title="Twitter"><i class="fab fa-twitter"></i></a>
+                                <a href="{{ $getSetting->facebook }}" title="Facebook"><i
+                                        class="fab fa-facebook-f"></i></a>
+                                <a href="{{ $getSetting->linkedin }}" title="Linkedin"><i
+                                        class="fab fa-linkedin-in"></i></a>
+                                <a href="{{ $getSetting->instagram }}" title="Instagram"><i
+                                        class="fab fa-instagram"></i></a>
+                                <a href="{{ $getSetting->youtube }}" title="Youtube"><i class="fab fa-youtube"></i></a>
                             </div>
                         </div>
                     </div>

@@ -3,8 +3,8 @@
         <div class="row">
             <div class="col-md-6">
                 <div class="tb-contact">
-                    <p><i class="fas fa-envelope"></i>info@mail.com</p>
-                    <p><i class="fas fa-phone-alt"></i>+012 345 6789</p>
+                    <p><i class="fas fa-envelope"></i>{{ $getSetting->email }}</p>
+                    <p><i class="fas fa-phone-alt"></i>{{ $getSetting->phone }}</p>
                 </div>
             </div>
             <div class="col-md-6">
@@ -27,15 +27,13 @@
             <div class="col-lg-3 col-md-4">
                 <div class="b-logo">
                     <a href="index.html">
-                        <img src="{{ asset('assets/frontend/img/logo.png') }}" alt="Logo" />
+                        <img src="{{ asset('assets/frontend') }}{{ $getSetting->logo }}" alt="Logo" />
                     </a>
                 </div>
             </div>
             <div class="col-lg-6 col-md-4">
                 <div class="b-ads">
-                    <a href="https://htmlcodex.com">
-                        <img src="{{ asset('assets/frontend/img/ads-1.jpg') }}" alt="Ads" />
-                    </a>
+
                 </div>
             </div>
             <div class="col-lg-3 col-md-4">
@@ -73,11 +71,11 @@
                     <a href="contact.html" class="nav-item nav-link">Contact Us</a>
                 </div>
                 <div class="social ml-auto">
-                    <a href=""><i class="fab fa-twitter"></i></a>
-                    <a href=""><i class="fab fa-facebook-f"></i></a>
-                    <a href=""><i class="fab fa-linkedin-in"></i></a>
-                    <a href=""><i class="fab fa-instagram"></i></a>
-                    <a href=""><i class="fab fa-youtube"></i></a>
+                    <a href="{{ $getSetting->twitter }}" title="Twitter"><i class="fab fa-twitter"></i></a>
+                    <a href=" {{ $getSetting->facebook }}" title="Facebook"><i class="fab fa-facebook-f"></i></a>
+                    <a href="{{ $getSetting->linkedin }}" title="Linkedin"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="{{ $getSetting->instagram }}" title="Instagram"><i class="fab fa-instagram"></i></a>
+                    <a href="{{ $getSetting->youtube }}" title="Youtube"><i class="fab fa-youtube"></i></a>
                 </div>
             </div>
         </nav>

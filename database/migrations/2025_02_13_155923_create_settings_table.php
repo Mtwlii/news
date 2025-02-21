@@ -17,8 +17,9 @@ return new class extends Migration
             $table->string('favicon', 255);
             $table->string('logo', 255);
             $table->string('facebook', 255);
-            $table->string('instagram', 100);
+            $table->string('instagram', 255);
             $table->string('twitter', 255);
+            $table->string('linkedin', 255);
             $table->string('youtube', 255);
             $table->string('street', 255);
             $table->string('city', 100);
