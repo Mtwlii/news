@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Models\RelatedNewsSite;
 use App\Models\Setting;
 use Illuminate\Support\ServiceProvider;
 
@@ -43,6 +44,10 @@ class CacheSettingProvider extends ServiceProvider
                 'phone' => '01008533066',
             ]);
         });
+        $relatedsite = RelatedNewsSite::Select('name', 'url')->get();
+        view()->share([
+            'relatedsite' => $relatedsite
+        ]);
         view()->share([
             'getSetting' => $getSetting
         ]);

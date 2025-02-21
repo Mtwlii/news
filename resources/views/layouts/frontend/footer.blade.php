@@ -29,11 +29,10 @@
                     <div class="footer-widget">
                         <h3 class="title">Useful Links</h3>
                         <ul>
-                            <li><a href="#">Lorem ipsum</a></li>
-                            <li><a href="#">Pellentesque</a></li>
-                            <li><a href="#">Aenean vulputate</a></li>
-                            <li><a href="#">Vestibulum sit amet</a></li>
-                            <li><a href="#">Nam dignissim</a></li>
+                            @foreach ($relatedsite as $sites)
+                                <li><a href="{{ $sites->url }}" title="{{ $sites->name }}">{{ $sites->name }}</a>
+                                </li>
+                            @endforeach
                         </ul>
                     </div>
                 </div>
@@ -59,8 +58,14 @@
                                 Lorem ipsum dolor sit amet, consectetur adipiscing elit.
                                 Vivamus sed porta dui. Class aptent taciti sociosqu
                             </p>
-                            <form>
-                                <input class="form-control" type="email" placeholder="Your email here" />
+                            <form method="POST" action="{{ route('frontend.news.subscribe') }}">
+                                @csrf
+                                <input class="form-control" type="email" name="email" id="email"
+                                    placeholder="Your email here" />
+                                    @error('email')
+                                    <span class="text-danger" role="alert"></span>
+                                        <strong class="text-danger">{{ $message }}</strong>
+                                    @enderror
                                 <button class="btn">Submit</button>
                             </form>
                         </div>
