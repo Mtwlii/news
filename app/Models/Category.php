@@ -18,8 +18,12 @@ class Category extends Model
     //     'status',
     // ];
 
-    public function post()
+    // public function post()
+    // {
+    //     return $this->belongsTo(Post::class, 'category_id');
+    // }
+    public function posts()
     {
-        return $this->belongsTo(Post::class, 'category_id');
+        return $this->hasMany(Post::class, 'category_id');
     }
 }
