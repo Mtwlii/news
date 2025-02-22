@@ -4,6 +4,7 @@
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\frontend\HomeController;
+use App\Http\Controllers\frontend\categoryController;
 use App\Http\Controllers\Frontend\NewsSubscriberController;
 
 /*
@@ -23,6 +24,7 @@ Route::group([
 ], function () {
     Route::get('/', [HomeController::class, 'index'])->name('index');
     Route::post('news_subscribe', [NewsSubscriberController::class, 'store'])->name('news.subscribe');
+    Route::get('/category/{slug}', categoryController::class)->name('category.posts');
 });
 Auth::routes();
 

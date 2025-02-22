@@ -2,8 +2,9 @@
 
 namespace App\Providers;
 
-use App\Models\RelatedNewsSite;
 use App\Models\Setting;
+use App\Models\Category;
+use App\Models\RelatedNewsSite;
 use Illuminate\Support\ServiceProvider;
 
 class CacheSettingProvider extends ServiceProvider
@@ -45,11 +46,11 @@ class CacheSettingProvider extends ServiceProvider
             ]);
         });
         $relatedsite = RelatedNewsSite::Select('name', 'url')->get();
+        $categories = Category::Select('slug', 'name')->get();
         view()->share([
-            'relatedsite' => $relatedsite
-        ]);
-        view()->share([
-            'getSetting' => $getSetting
+            'getSetting' => $getSetting,
+            'relatedsite' => $relatedsite,
+            'categories' => $categories
         ]);
     }
 }
