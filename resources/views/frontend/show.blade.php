@@ -56,10 +56,16 @@
                     <!-- Comment Section -->
                     <div class="comment-section">
                         <!-- Comment Input -->
-                        <div class="comment-input">
-                            <input type="text" placeholder="Add a comment..." id="commentBox" />
-                            <button id="addCommentBtn">Post</button>
-                        </div>
+                        <form id="commentForm">
+                            @csrf
+                            <div class="comment-input">
+                                <input name="comment" title="comment" type="text" placeholder="Add a comment..."
+                                    id="commentBox" />
+                                <input type="hidden" name="user_id" value="2">
+                                <input type="hidden" name="post_id" value="{{ $mainpost->id }}">
+                                <button type="submit">Post</button>
+                            </div>
+                        </form>
 
                         <!-- Display Comments -->
                         <div class="comments">
@@ -191,6 +197,7 @@
 
 @push('js')
     <script>
+        //----------------- show more comments
         $(document).on('click', '#showMoreBtn', function(e) {
             e.preventDefault();
             $.ajax({
@@ -211,6 +218,27 @@
                         $('#showMoreBtn').hide();
                     });
                 }
+            });
+        });
+
+        // ------------------add comment
+        $(document).on('submit', '#commentForm', function(e) {
+            e.preventDefault();
+            // This AJAX form submission allows users to add comments without reloading the page
+            var formData = new FormData($(this)[0]); // form refers to the form object
+            $.ajax({
+                url: "{{ route('frontend.post.comments.store') }}",
+                type: 'POST',
+                data: formData,
+                processData: false,
+                contentType: false,
+                success: function(data) {
+
+                },
+                error: function(data) {
+
+
+                },
             });
         });
     </script>

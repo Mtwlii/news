@@ -6,6 +6,7 @@ use App\Models\Post;
 use App\Models\Category;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\Comment;
 
 class PostController extends Controller
 {
@@ -30,5 +31,32 @@ class PostController extends Controller
         }
         $comments = $post->comments()->with('user')->get();
         return response()->json($comments);
+    }
+    public function saveComment(Request $request)
+    {
+        $request->validate([
+            'user_id' => ['required', 'exists:users,id'],
+            'comment' => ['required', 'string', 'max:255'],
+        ]);
+
+        $comment = Comment::create([
+            'user_id' => $request->user_id,
+            'comment' => $request->comment,
+            'post_id' => $request->post_id,
+            'ip_address' => $request->ip(),
+        ]);
+
+        if (!$comment) {
+            return response()->json([
+                'data' => 'Comment not saved',
+                'status' => 403
+            ]);
+        }
+
+        return response()->json([
+            'msg' => 'Comment saved successfully',
+            'data' => $comment,
+            'status' => 201
+        ]);
     }
 }

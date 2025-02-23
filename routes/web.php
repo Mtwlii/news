@@ -28,6 +28,7 @@ Route::group([
     Route::get('/category/{slug}', categoryController::class)->name('category.posts');
     Route::get('post/{slug}', [PostController::class, 'show'])->name('post.show');
     Route::get('post/comments/{slug}', [PostController::class, 'getAllComments'])->name('post.getAllComments');
+    Route::post('post/comments/store', [PostController::class, 'saveComment'])->name('post.comments.store');
 });
 Auth::routes();
 
