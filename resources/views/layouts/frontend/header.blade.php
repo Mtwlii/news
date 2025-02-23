@@ -63,8 +63,8 @@
                         <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">categories</a>
                         <div class="dropdown-menu">
                             @foreach ($categories as $category)
-                                <a href="{{ route('frontend.category.posts', $category->slug) }}" title="{{ $category->name }}"
-                                    class="dropdown-item">{{ $category->name }}</a>
+                                <a href="{{ route('frontend.category.posts', $category->slug) }}"
+                                    title="{{ $category->name }}" class="dropdown-item">{{ $category->name }}</a>
                             @endforeach
                         </div>
                     </div>

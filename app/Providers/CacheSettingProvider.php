@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Models\Post;
 use App\Models\Setting;
 use App\Models\Category;
 use App\Models\RelatedNewsSite;
@@ -45,12 +46,9 @@ class CacheSettingProvider extends ServiceProvider
                 'phone' => '01008533066',
             ]);
         });
-        $relatedsite = RelatedNewsSite::Select('name', 'url')->get();
-        $categories = Category::Select('slug', 'name')->get();
+
         view()->share([
             'getSetting' => $getSetting,
-            'relatedsite' => $relatedsite,
-            'categories' => $categories
         ]);
     }
 }

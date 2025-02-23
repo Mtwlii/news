@@ -196,6 +196,7 @@ return [
         App\Providers\RouteServiceProvider::class,
         App\Providers\CacheServesProvider::class,
         App\Providers\CacheSettingProvider::class,
+        App\Providers\ViewServisProvider::class,
 
     ],
 
