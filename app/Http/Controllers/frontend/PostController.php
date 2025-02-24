@@ -45,17 +45,20 @@ class PostController extends Controller
             'post_id' => $request->post_id,
             'ip_address' => $request->ip(),
         ]);
+        
+        // Load the related user data for the comment to make it available in the response
+        $comment->load('user');
 
         if (!$comment) {
             return response()->json([
-                'data' => 'Comment not saved',
+                'comment' => 'Comment not saved',
                 'status' => 403
             ]);
         }
 
         return response()->json([
             'msg' => 'Comment saved successfully',
-            'data' => $comment,
+            'comment' => $comment,
             'status' => 201
         ]);
     }

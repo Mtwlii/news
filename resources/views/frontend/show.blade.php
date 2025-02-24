@@ -63,10 +63,12 @@
                                     id="commentBox" />
                                 <input type="hidden" name="user_id" value="2">
                                 <input type="hidden" name="post_id" value="{{ $mainpost->id }}">
-                                <button type="submit">Post</button>
+                                <button type="submit">Comment</button>
                             </div>
                         </form>
+                        <div id="errorMsg" class="alert alert-danger " style="display: none;" role="alert">
 
+                        </div>
                         <!-- Display Comments -->
                         <div class="comments">
                             @foreach ($mainpost->comments as $comment)
@@ -233,10 +235,22 @@
                 processData: false,
                 contentType: false,
                 success: function(data) {
-
+                    $('#errorMsg').hide();
+                    $('#commentBox').val('');
+                    $('.comments').prepend(`
+                    <div class="comment">
+                        <img src=" ${data.comment.user.image}" alt="User Image" class="comment-img" />
+                        <div class="comment-content">
+                            <span class="username">${data.comment.user.name}</span>
+                            <p class="comment-text">${data.comment.comment}</p>
+                        </div>
+                    </div>
+                `);
                 },
-                error: function(data) {
-
+                error: function(comment) {
+                    var response = JSON.parse(comment.responseText);
+                    $('#errorMsg').show();
+                    $('#errorMsg').text(response.errors.comment[0]);
 
                 },
             });
