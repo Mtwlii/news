@@ -4,9 +4,10 @@
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\frontend\HomeController;
-use App\Http\Controllers\frontend\categoryController;
-use App\Http\Controllers\Frontend\NewsSubscriberController;
 use App\Http\Controllers\Frontend\PostController;
+use App\Http\Controllers\frontend\categoryController;
+use App\Http\Controllers\frontend\ContactUsController;
+use App\Http\Controllers\Frontend\NewsSubscriberController;
 
 /*
 |--------------------------------------------------------------------------
@@ -29,6 +30,8 @@ Route::group([
     Route::get('post/{slug}', [PostController::class, 'show'])->name('post.show');
     Route::get('post/comments/{slug}', [PostController::class, 'getAllComments'])->name('post.getAllComments');
     Route::post('post/comments/store', [PostController::class, 'saveComment'])->name('post.comments.store');
+    Route::get('contact-us', [ContactUsController::class, 'index'])->name('contactus.index');
+    Route::post('contact/store', [ContactUsController::class, 'store'])->name('contactus.store');
 });
 Auth::routes();
 
