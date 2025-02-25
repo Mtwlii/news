@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\frontend\HomeController;
 use App\Http\Controllers\Frontend\PostController;
+use App\Http\Controllers\frontend\SearchControler;
 use App\Http\Controllers\frontend\categoryController;
 use App\Http\Controllers\frontend\ContactUsController;
 use App\Http\Controllers\Frontend\NewsSubscriberController;
@@ -25,13 +26,22 @@ Route::group([
     'as' => 'frontend.'
 ], function () {
     Route::get('/', [HomeController::class, 'index'])->name('index');
-    Route::post('news_subscribe', [NewsSubscriberController::class, 'store'])->name('news.subscribe');
+    Route::post('/news_subscribe', [NewsSubscriberController::class, 'store'])->name('news.subscribe');
     Route::get('/category/{slug}', categoryController::class)->name('category.posts');
-    Route::get('post/{slug}', [PostController::class, 'show'])->name('post.show');
-    Route::get('post/comments/{slug}', [PostController::class, 'getAllComments'])->name('post.getAllComments');
-    Route::post('post/comments/store', [PostController::class, 'saveComment'])->name('post.comments.store');
-    Route::get('contact-us', [ContactUsController::class, 'index'])->name('contactus.index');
-    Route::post('contact/store', [ContactUsController::class, 'store'])->name('contactus.store');
+
+    // Post Routes
+    Route::controller(PostController::class)->name('post.')->prefix('post')->group(function () {
+        Route::get('/{slug}',  'show')->name('show');
+        Route::get('/comments/{slug}', 'getAllComments')->name('getAllComments');
+        Route::post('/comments/store',  'saveComment')->name('comments.store');
+    });
+
+    // Contact Us Routes
+    Route::controller(ContactUsController::class)->name('contactus.')->prefix('contact-us')->group(function () {
+        Route::get('/',  'index')->name('index');
+        Route::post('/store',  'store')->name('store');
+    });
+    Route::match(['get', 'post'], '/search', SearchControler::class)->name('search');
 });
 Auth::routes();
 

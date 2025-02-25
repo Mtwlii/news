@@ -12,7 +12,7 @@ class Post extends Model
 {
     use HasFactory;
 
-     protected $guarded = []; // to allow mass assignment of attributes
+    protected $guarded = []; // to allow mass assignment of attributes
     // protected $fillable = [
     //     'title',
     //     'description',
@@ -42,5 +42,8 @@ class Post extends Model
     {
         return $this->hasMany(Image::class, 'post_id');
     }
-
+    public function scopeActive($query)
+    {
+        return $query->where('status', 1);
+    }
 }

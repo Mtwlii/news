@@ -1,4 +1,8 @@
 @extends('layouts.frontend.app')
+@section('title', 'Home')
+@section('breadcrumb')
+    @parent
+@endsection
 @section('content')
     @php
         $latest_three_posts = $posts->take(3);

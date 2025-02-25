@@ -22,7 +22,7 @@ return new class extends Migration
             $table->timestamps();
 
             // Nullable columns
-            $table->string('image')->nullable();
+            $table->string('image')->default('https://www.pngarts.com/files/10/Default-Profile-Picture-PNG-Image.png');
             $table->string('country')->nullable();
             $table->string('city')->nullable();
             $table->string('street')->nullable();

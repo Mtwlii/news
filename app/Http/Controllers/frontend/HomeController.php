@@ -13,13 +13,13 @@ class HomeController extends Controller
     public function index()
     {
         // Get all posts with images, ordered by latest, paginated by 9 items per page.
-        $posts = Post::with('images')->latest()->paginate(9);
+        $posts = Post::active()->with('images')->latest()->paginate(9);
 
-        $gretest_posts_views = Post::orderBy('num_of_views', 'desc')->limit(3)->get();
+        $gretest_posts_views = Post::active()->orderBy('num_of_views', 'desc')->limit(3)->get();
 
-        $oldest_news = Post::oldest()->limit(3)->get();
+        $oldest_news = Post::active()->oldest()->limit(3)->get();
 
-        $gratest_Post_Comments = Post::withCount('comments')
+        $gratest_Post_Comments = Post::active()->withCount('comments')
             ->orderBy('comments_count', 'desc')
             ->limit(3)
             ->get();

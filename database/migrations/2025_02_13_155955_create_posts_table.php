@@ -19,7 +19,7 @@ class CreatePostsTable extends Migration
             $table->boolean('comment_able')->default(true);
             $table->foreignId('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->bigInteger('num_of_views')->default(0);
-            $table->boolean('status')->default(true);
+            $table->boolean('status')->default(1);
             $table->foreignId('category_id')->references('id')->on('categories')->onDelete('cascade');
             $table->timestamps();
         });

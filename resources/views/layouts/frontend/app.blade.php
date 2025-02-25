@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="utf-8" />
-    <title>Bootstrap News Template - Free HTML Templates</title>
+    <title>@yield('title')</title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport" />
     <meta content="Bootstrap News Template - Free HTML Templates" name="keywords" />
     <meta content="Bootstrap News Template - Free HTML Templates" name="description" />
@@ -27,6 +27,18 @@
 <body>
     <!-- Top Bar Start -->
     @include('layouts.frontend.header')
+    <!-- Breadcrumb Start -->
+    <div class="breadcrumb-wrap">
+        <div class="container">
+            <ul class="breadcrumb">
+                @section('breadcrumb')
+                    <li class="breadcrumb-item"><a href="{{ route('frontend.index') }}">Home</a></li>
+                @show
+
+            </ul>
+        </div>
+    </div>
+    <!-- Breadcrumb End -->
 
     @yield('content')
 

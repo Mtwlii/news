@@ -25,7 +25,7 @@ class PostController extends Controller
     }
     public function getAllComments(Request $request, $slug)
     {
-        $post = Post::where('slug', $slug)->first();
+        $post = Post::active()->where('slug', $slug)->first();
         if (!$post) {
             return response()->json(['error' => 'Post not found'], 404);
         }
@@ -45,7 +45,7 @@ class PostController extends Controller
             'post_id' => $request->post_id,
             'ip_address' => $request->ip(),
         ]);
-        
+
         // Load the related user data for the comment to make it available in the response
         $comment->load('user');
 

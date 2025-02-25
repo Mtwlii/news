@@ -21,7 +21,7 @@ class UserFactory extends Factory
             'name' => fake()->name(),
             'email' => fake()->unique()->safeEmail(),
             'username' => fake()->unique()->userName(),
-            'image' => fake()->imageUrl(100, 100),
+            'image' => 'https://www.pngarts.com/files/10/Default-Profile-Picture-PNG-Image.png',
             'status' => rand(0, 1),
             'country' => fake()->country(),
             'city' => fake()->city(),
