@@ -3,13 +3,16 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Models\User;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Illuminate\Http\JsonResponse;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Auth\Events\Registered;
+use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
+
 
 class RegisterController extends Controller
 {
@@ -60,7 +63,7 @@ class RegisterController extends Controller
             'country' => ['nullable', 'string', 'max:50'],
             'city' => ['nullable', 'string', 'max:50'],
             'street' => ['nullable', 'string', 'max:50'],
-            'image' => ['nullable'],
+            'image' => ['nullable', 'image', 'mimes:jpeg,png,jpg,gif,svg', 'max:2048'],
         ]);
     }
 
@@ -72,7 +75,7 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        return User::create([
+        $user = User::create([
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
@@ -83,6 +86,19 @@ class RegisterController extends Controller
             'street' => $data['street'],
             //  'image' => $data['image'],
         ]);
+        // if ($data['image']) {
+        //     $file = $data['image'];
+        //     $filename = Str::slug($user->username) . '-' . time() . $file->getClientOriginalExtension();
+        //     $path = $file->storeAs('uploads/users', $filename, ['disk' => 'uploads']);
+        //     $user->update(['image' => $path]);
+        // }
+        if ($data['image']) {
+            $file = $data['image'];
+            $filename = Str::slug($user->username) . '-' . time() . rand(1, 999) . '.' . $file->getClientOriginalExtension();
+            $file->move(public_path('uploads/users'), $filename);
+            $user->update(['image' => $filename]);
+        }
+        return $user;
     }
     public function register(Request $request)
     {
@@ -99,5 +115,10 @@ class RegisterController extends Controller
         return $request->wantsJson()
             ? new JsonResponse([], 201)
             : redirect($this->redirectPath());
+    }
+    protected function registered(Request $request, $user)
+    {
+        Session::flash('success', 'You have been registered successfully');
+        return redirect('/');
     }
 }
