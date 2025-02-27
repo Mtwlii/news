@@ -44,9 +44,9 @@ class LoginController extends Controller
         Session::flash('success', 'You have been logged out successfully');
         return redirect()->route('frontend.index');
     }
-    public function login(Request $request)
+    protected function authenticated(Request $request, $user)
     {
         Session::flash('success', 'You have been logged in successfully');
-        return redirect('/');
+        return redirect()->route('frontend.index');
     }
 }

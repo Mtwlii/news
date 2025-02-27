@@ -1,10 +1,10 @@
 @extends('layouts.frontend.app')
 
-@section('title', $category->name)
+@section('title', strtoupper($category->name))
 
 @section('breadcrumb')
     @parent
-    <li class="breadcrumb-item active">{{ $category->name }}</li>
+    <li class="breadcrumb-item active">{{ strtoupper($category->name) }}</li>
 @endsection
 
 @section('content')
@@ -44,7 +44,7 @@
                         <ul>
                             @foreach ($categories as $category)
                                 <li><a href="{{ route('frontend.category.posts', $category->slug) }}"
-                                        title="{{ $category->name }}">{{ $category->name }}</a></li>
+                                        title="{{ $category->name }}">{{ strtoupper($category->name) }}</a></li>
                             @endforeach
                         </ul>
                     </div>

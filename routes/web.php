@@ -1,6 +1,6 @@
 <?php
 
-
+use App\Http\Controllers\Auth\VerificationController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\frontend\HomeController;
@@ -21,11 +21,12 @@ use App\Http\Controllers\Frontend\NewsSubscriberController;
 |
 */
 
+Route::redirect('/', '/home');
 
 Route::group([
     'as' => 'frontend.'
 ], function () {
-    Route::get('/', [HomeController::class, 'index'])->name('index');
+    Route::get('/home', [HomeController::class, 'index'])->name('index');
     Route::post('/news_subscribe', [NewsSubscriberController::class, 'store'])->name('news.subscribe');
     Route::get('/category/{slug}', categoryController::class)->name('category.posts');
 
@@ -43,6 +44,11 @@ Route::group([
     });
     Route::match(['get', 'post'], '/search', SearchControler::class)->name('search');
 });
+
+Route::controller(VerificationController::class)->prefix('email')->name('verification.')->group(function () {
+    Route::get('verify', 'show')->name('notice');
+    Route::get('verify/{id}/{hash}', 'verify')->name('verify');
+    Route::post('resend', 'resend')->name('resend');
+});
 Auth::routes();
 
-Route::get('/home', [HomeController::class, 'index'])->name('home');

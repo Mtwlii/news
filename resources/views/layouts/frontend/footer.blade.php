@@ -62,10 +62,10 @@
                                 @csrf
                                 <input class="form-control" type="email" name="email" id="email"
                                     placeholder="Your email here" />
-                                    @error('email')
+                                @error('email')
                                     <span class="text-danger" role="alert"></span>
-                                        <strong class="text-danger">{{ $message }}</strong>
-                                    @enderror
+                                    <strong class="text-danger">{{ $message }}</strong>
+                                @enderror
                                 <button class="btn">Submit</button>
                             </form>
                         </div>
@@ -77,7 +77,7 @@
     <!-- Footer End -->
 
     <!-- Footer Menu Start -->
-    <div class="footer-menu">
+    {{-- <div class="footer-menu">
         <div class="container">
             <div class="f-menu">
                 <a href="">Terms of use</a>
@@ -88,7 +88,7 @@
                 <a href="">Contact us</a>
             </div>
         </div>
-    </div>
+    </div> --}}
     <!-- Footer Menu End -->
 
     <!-- Footer Bottom Start -->
@@ -97,14 +97,15 @@
             <div class="row">
                 <div class="col-md-6 copyright">
                     <p>
-                        Copyright &copy; <a href="">Your Site Name</a>. All Rights
+                        Copyright &copy; <a href="{{ route('frontend.index') }}">{{ config('app.name') }}</a> . All
+                        Rights
                         Reserved
                     </p>
                 </div>
 
                 <!--/*** This template is free as long as you keep the footer author’s credit link/attribution link/backlink. If you'd like to use the template without the footer author’s credit link/attribution link/backlink, you can purchase the Credit Removal License from "https://htmlcodex.com/credit-removal". Thank you for your support. ***/-->
                 <div class="col-md-6 template-by">
-                    <p>Designed By <a href="https://htmlcodex.com">HTML Codex</a></p>
+                    <p>Designed By <a href="https://github.com/Mtwlii">Metwally Mohamed</a></p>
                 </div>
             </div>
         </div>
