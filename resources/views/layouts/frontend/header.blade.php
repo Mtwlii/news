@@ -85,7 +85,10 @@
                         </div>
                     </div>
                     <a href="{{ route('frontend.contactus.index') }}" class="nav-item nav-link">Contact Us</a>
-                    <a href="dashboard.html" class="nav-item nav-link">Dashboard</a>
+                    @auth
+
+                        <a href="{{ route('frontend.dashboard.profile.index') }}" class="nav-item nav-link">Dashboard</a>
+                    @endauth
                 </div>
                 <div class="social ml-auto">
                     <a href="{{ $getSetting->twitter }}" title="Twitter"><i class="fab fa-twitter"></i></a>

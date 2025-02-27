@@ -8,6 +8,7 @@ use App\Http\Controllers\Frontend\PostController;
 use App\Http\Controllers\frontend\SearchControler;
 use App\Http\Controllers\frontend\categoryController;
 use App\Http\Controllers\frontend\ContactUsController;
+use App\Http\Controllers\frontend\dashboard\ProfileController;
 use App\Http\Controllers\Frontend\NewsSubscriberController;
 
 /*
@@ -43,6 +44,13 @@ Route::group([
         Route::post('/store',  'store')->name('store');
     });
     Route::match(['get', 'post'], '/search', SearchControler::class)->name('search');
+    Route::prefix('account/')->name('dashboard.')->middleware(['auth:web', 'verified'])->group(function () {
+        Route::controller(ProfileController::class)->name('profile.')->group(function () {
+            Route::get('profile', 'index')->name('index');
+            Route::post('/post', 'storePost')->name('post.store');
+            // Route::post('/update-password', 'updatePassword')->name('update.password');
+        });
+    });
 });
 
 Route::controller(VerificationController::class)->prefix('email')->name('verification.')->group(function () {
@@ -50,5 +58,5 @@ Route::controller(VerificationController::class)->prefix('email')->name('verific
     Route::get('verify/{id}/{hash}', 'verify')->name('verify');
     Route::post('resend', 'resend')->name('resend');
 });
-Auth::routes();
 
+Auth::routes();
