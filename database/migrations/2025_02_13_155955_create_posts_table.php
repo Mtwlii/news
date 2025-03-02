@@ -15,7 +15,7 @@ class CreatePostsTable extends Migration
             $table->id();
             $table->string('title');
             $table->text('description');
-            $table->string('slug');
+            $table->string('slug')->default('title');
             $table->boolean('comment_able')->default(true);
             $table->foreignId('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->bigInteger('num_of_views')->default(0);

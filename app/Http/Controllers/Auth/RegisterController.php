@@ -86,18 +86,18 @@ class RegisterController extends Controller
             'street' => $data['street'],
             //  'image' => $data['image'],
         ]);
-        // if ($data['image']) {
-        //     $file = $data['image'];
-        //     $filename = Str::slug($user->username) . '-' . time() . $file->getClientOriginalExtension();
-        //     $path = $file->storeAs('uploads/users', $filename, ['disk' => 'uploads']);
-        //     $user->update(['image' => $path]);
-        // }
         if ($data['image']) {
             $file = $data['image'];
-            $filename = Str::slug($user->username) . '-' . time() . rand(1, 999) . '.' . $file->getClientOriginalExtension();
-            $file->move(public_path('uploads/users'), $filename);
-            $user->update(['image' => $filename]);
+            $filename = Str::slug($user->username) . '-' . time() . $file->getClientOriginalExtension();
+            $path = $file->storeAs('uploads/users', $filename, ['disk' => 'uploads']);
+            $user->update(['image' => $path]);
         }
+        // if ($data['image']) {
+        //     $file = $data['image'];
+        //     $filename = Str::slug($user->username) . '-' . time() . rand(1, 999) . '.' . $file->getClientOriginalExtension();
+        //     $file->storeAs('uploads/users', $file, ['disk' => 'uploads']);
+        //     $user->update(['image' => $file]);
+        // }
         return $user;
     }
     public function register(Request $request)

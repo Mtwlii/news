@@ -9,7 +9,7 @@
         <aside class="col-md-3 nav-sticky dashboard-sidebar">
             <!-- User Info Section -->
             <div class="user-info text-center p-3">
-                <img src="{{ asset('uploads/users/' . Auth::user()->image) }}" alt="User Image" class="rounded-circle mb-2"
+                <img src="{{ asset(Auth::user()->image) }}" alt="User Image" class="rounded-circle mb-2"
                     style="width: 80px; height: 80px; object-fit: cover" />
                 <h5 class="mb-0" style="color: #ff6f61">{{ Auth::user()->name }}</h5>
             </div>
@@ -37,8 +37,8 @@
             <section id="profile" class="content-section active">
                 <h2>User Profile</h2>
                 <div class="user-profile mb-3">
-                    <img src=" {{ asset('uploads/users/' . Auth::user()->image) }}" alt="User Image"
-                        class="profile-img rounded-circle" style="width: 100px; height: 100px;" />
+                    <img src=" {{ asset(Auth::user()->image) }}" alt="User Image" class="profile-img rounded-circle"
+                        style="width: 100px; height: 100px;" />
                     <span class="username">{{ Auth::user()->name }}</span>
                 </div>
                 <br>
@@ -102,7 +102,7 @@
                         <!-- Post Item -->
                         <div class="post-item mb-4 p-3 border rounded">
                             <div class="post-header d-flex align-items-center mb-2">
-                                <img src="{{ asset('uploads/users/' . Auth::user()->image) }}" alt="User Image"
+                                <img src="{{ asset( Auth::user()->image) }}" alt="User Image"
                                     class="rounded-circle" style="width: 50px; height: 50px;" />
                                 <div class="ms-3">
                                     <h5 class="mb-0">{{ Auth::user()->name }}</h5>
@@ -175,8 +175,7 @@
                             <!-- Display Comments -->
                             <div class="comments">
                                 <div class="comment">
-                                    <img src="{{ asset('uploads/users/' . Auth::user()->image) }}" alt="User Image"
-                                        class="comment-img" />
+                                    <img src="{{ asset(Auth::user()->image) }}" alt="User Image" class="comment-img" />
                                     <div class="comment-content">
                                         <span class="username"></span>
                                         <p class="comment-text">first comment</p>
