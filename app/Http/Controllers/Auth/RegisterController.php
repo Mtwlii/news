@@ -86,9 +86,9 @@ class RegisterController extends Controller
             'street' => $data['street'],
             //  'image' => $data['image'],
         ]);
-        if ($data['image']) {
+        if (isset($data['image'])) {
             $file = $data['image'];
-            $filename = Str::slug($user->username) . '-' . time() . $file->getClientOriginalExtension();
+            $filename = Str::slug($user->username) . '-' . time() . '.' . $file->getClientOriginalExtension();
             $path = $file->storeAs('uploads/users', $filename, ['disk' => 'uploads']);
             $user->update(['image' => $path]);
         }

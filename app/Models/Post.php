@@ -5,6 +5,7 @@ namespace App\Models;
 use App\Models\User;
 use App\Models\Comment;
 use App\Models\Category;
+use Illuminate\Support\Str;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
@@ -23,7 +24,13 @@ class Post extends Model
     //     'status',
     //     'comment_able',
     // ];
-
+    protected static function booted()
+    {
+        static::creating(function ($post) {
+            // توليد الـ slug من الـ title
+            $post->slug = Str::slug($post->title);
+        });
+    }
     public function category()
     {
         return $this->belongsTo(Category::class, 'category_id');

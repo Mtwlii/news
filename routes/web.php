@@ -44,10 +44,14 @@ Route::group([
         Route::post('/store',  'store')->name('store');
     });
     Route::match(['get', 'post'], '/search', SearchControler::class)->name('search');
+    // Profile // Dashboard Routes for authenticated users only
     Route::prefix('account/')->name('dashboard.')->middleware(['auth:web', 'verified'])->group(function () {
         Route::controller(ProfileController::class)->name('profile.')->group(function () {
             Route::get('profile', 'index')->name('index');
             Route::post('/post', 'storePost')->name('post.store');
+            Route::get('/post/edit/{slug}', 'editPost')->name('post.edit');
+            Route::delete('/post/delete', 'deletePost')->name('post.delete');
+
             // Route::post('/update-password', 'updatePassword')->name('update.password');
         });
     });

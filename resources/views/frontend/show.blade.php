@@ -34,11 +34,11 @@
                         <div class="carousel-inner">
                             @foreach ($mainpost->images as $image)
                                 <div class="carousel-item @if ($loop->index == 0) active @endif">
-                                    <img src="{{ $image->path }}" class="d-block w-100" alt="First Slide">
+                                    <img src="{{ asset($image->path) }}" class="d-block w-100" alt="First Slide">
                                     <div class="carousel-caption d-none d-md-block">
-                                        <h5>{{ $mainpost->title }}</h5>
+                                        <h5>{!! $mainpost->title !!}</h5>
                                         <p>
-                                            {{ substr($mainpost->description, 0, 70) }}
+                                            {{-- {!! substr($mainpost->description, 0, 70) !!} --}}
                                         </p>
                                     </div>
                                 </div>
@@ -56,22 +56,24 @@
                         </a>
                     </div>
                     <div class="sn-content">
-                        {{ $mainpost->description }}
+                        {!! $mainpost->description !!}
                     </div>
 
                     <!-- Comment Section -->
                     <div class="comment-section">
                         <!-- Comment Input -->
-                        <form id="commentForm">
-                            @csrf
-                            <div class="comment-input">
-                                <input name="comment" title="comment" type="text" placeholder="Add a comment..."
-                                    id="commentBox" />
-                                <input type="hidden" name="user_id" value="2">
-                                <input type="hidden" name="post_id" value="{{ $mainpost->id }}">
-                                <button type="submit">Comment</button>
-                            </div>
-                        </form>
+                        @if ($mainpost->comment_able == true)
+                            <form id="commentForm">
+                                @csrf
+                                <div class="comment-input">
+                                    <input name="comment" title="comment" type="text" placeholder="Add a comment..."
+                                        id="commentBox" />
+                                    <input type="hidden" name="user_id" value="{{ auth()->user()->id }}">
+                                    <input type="hidden" name="post_id" value="{{ $mainpost->id }}">
+                                    <button type="submit">Comment</button>
+                                </div>
+                            </form>
+                        @endif
                         <div id="errorMsg" class="alert alert-danger " style="display: none;" role="alert">
 
                         </div>
@@ -79,7 +81,7 @@
                         <div class="comments">
                             @foreach ($mainpost->comments as $comment)
                                 <div class="comment">
-                                    <img src="{{ $comment->user->image }}" alt="User Image" class="comment-img" />
+                                    <img src="{{ asset($comment->user->image) }}" alt="User Image" class="comment-img" />
                                     <div class="comment-content">
                                         <span class="username">{{ $comment->user->name }}</span>
                                         <p class="comment-text">{{ $comment->comment }}.</p>
@@ -90,7 +92,10 @@
                         </div>
 
                         <!-- Show More Button -->
-                        <button id="showMoreBtn" class="show-more-btn">Show more</button>
+                        @if ($mainpost->comments->count() > 2)
+                            <button id="showMoreBtn" class="show-more-btn">Show More</button>
+                        @endif
+
                     </div>
 
                     <!-- Related News -->
@@ -100,7 +105,7 @@
                             @foreach ($relatedPostCategory as $post)
                                 <div class="col-md-4">
                                     <div class="sn-img">
-                                        <img src="{{ $post->images->first()->path }}" class="img-fluid"
+                                        <img src="{{ asset($post->images->first()->path) }}" class="img-fluid"
                                             alt="{{ $post->title }}" />
                                         <div class="sn-title">
                                             <a
@@ -121,7 +126,7 @@
                                 @foreach ($relatedPostCategory->take(5) as $relatedPostCategory)
                                     <div class="nl-item">
                                         <div class="nl-img">
-                                            <img src="{{ $relatedPostCategory->images->first()->path }}" />
+                                            <img src="{{ asset($relatedPostCategory->images->first()->path) }}" />
                                         </div>
                                         <div class="nl-title">
                                             <a
@@ -152,7 +157,7 @@
                                         @foreach ($latest_posts as $post)
                                             <div class="tn-news">
                                                 <div class="tn-img">
-                                                    <img src="{{ $post->images->first()->path }} "
+                                                    <img src="{{ asset($post->images->first()->path) }} "
                                                         alt="{{ $post->title }} " />
                                                 </div>
                                                 <div class="tn-title">
@@ -166,7 +171,7 @@
                                         @foreach ($gratest_posts_comments as $gratest)
                                             <div class="tn-news">
                                                 <div class="tn-img">
-                                                    <img src="{{ $gratest->images->first()->path }}" />
+                                                    <img src="{{ asset($gratest->images->first()->path) }}" />
                                                 </div>
                                                 <div class="tn-title">
                                                     <a href=" {{ route('frontend.post.show', $gratest->slug) }}">

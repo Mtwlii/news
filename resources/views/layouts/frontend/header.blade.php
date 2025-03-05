@@ -73,9 +73,12 @@
 
             <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
                 <div class="navbar-nav mr-auto">
-                    <a href="{{ route('frontend.index') }}" class="nav-item nav-link active">Home</a>
+                    <a href="{{ route('frontend.index') }}"
+                        class="nav-item nav-link {{ request()->routeIs('frontend.index') ? 'active' : '' }}">Home</a>
                     <div class="nav-item dropdown">
-                        <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">categories</a>
+                        <a href="#"
+                            class="nav-link dropdown-toggle  {{ request()->routeIs('frontend.category.posts') ? 'active' : '' }}"
+                            data-toggle="dropdown">categories</a>
                         <div class="dropdown-menu">
                             @foreach ($categories as $category)
                                 <a href="{{ route('frontend.category.posts', $category->slug) }}"
@@ -84,10 +87,13 @@
                             @endforeach
                         </div>
                     </div>
-                    <a href="{{ route('frontend.contactus.index') }}" class="nav-item nav-link">Contact Us</a>
+                    <a href="{{ route('frontend.contactus.index') }}"
+                        class="nav-item nav-link {{ request()->routeIs('frontend.contactus.index') ? 'active' : '' }}">Contact
+                        Us</a>
                     @auth
 
-                        <a href="{{ route('frontend.dashboard.profile.index') }}" class="nav-item nav-link">Dashboard</a>
+                        <a href="{{ route('frontend.dashboard.profile.index') }}"
+                            class="nav-item nav-link {{ request()->routeIs('frontend.dashboard.profile.index') ? 'active' : '' }}">Dashboard</a>
                     @endauth
                 </div>
                 <div class="social ml-auto">

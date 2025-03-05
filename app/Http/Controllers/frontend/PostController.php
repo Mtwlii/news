@@ -36,7 +36,7 @@ class PostController extends Controller
     {
         $request->validate([
             'user_id' => ['required', 'exists:users,id'],
-            'comment' => ['required', 'string', 'max:255'],
+            'comment' => ['required', 'string'],
         ]);
 
         $comment = Comment::create([

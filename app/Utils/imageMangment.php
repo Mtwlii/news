@@ -3,6 +3,7 @@
 namespace App\Utils;
 
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\File;
 
 class imaGeMangment
 {
@@ -17,6 +18,16 @@ class imaGeMangment
                 $post->images()->create([
                     'path' => $path
                 ]);
+            }
+        }
+    }
+    public static function deleteImage($post)
+    {
+        if ($post->images->count() > 0) {
+            foreach ($post->images as $image) {
+                if (File::exists(public_path($image->path))) {
+                    File::delete(public_path($image->path));
+                }
             }
         }
     }
